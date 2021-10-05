@@ -1,3 +1,5 @@
+import time
+
 from watchdog.observers import polling
 
 from .whandler import WHandler
@@ -45,6 +47,8 @@ class ASWatchdog():
                 path=directory,
                 recursive=self.directories[directory]["recursive"])
 
+        self.observer.daemon = True
+
     def start(self):
 
         self.ascanner.logger.info("Preparing to observe %s directories:" % len(list(self.directories.keys())))
@@ -52,9 +56,19 @@ class ASWatchdog():
             self.ascanner.logger.info("* %s, recursive=%s" % (directory, self.directories[directory]["recursive"]))
 
         self.observer.start()
+
         self.ascanner.logger.info("Observing %s directories" % len(list(self.directories.keys())))
 
+        # monitor
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            self.observer.unschedule_all()
+            self.observer.stop()
+
     def stop(self):
+        self.observer.unschedule_all()
         self.observer.stop()
 
     @property
