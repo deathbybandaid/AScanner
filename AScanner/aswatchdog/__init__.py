@@ -49,6 +49,7 @@ class ASWatchdog():
                 path=directory,
                 recursive=self.directories[directory]["recursive"])
 
+    @property
     def scan_interval(self):
         return self.ascanner.config.dict["watchdog"]["polling_interval"]
 
