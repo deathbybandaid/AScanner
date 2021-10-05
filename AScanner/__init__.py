@@ -44,9 +44,13 @@ class AScanner_OBJ():
 
         self.ascanner.logger.info("Detecting and Opening any found target plugins.")
         for plugin_name in list(self.ascanner.plugins.plugins.keys()):
+
+            method = self.ascanner.plugins.plugins[plugin_name].name.lower()
+
             if self.ascanner.plugins.plugins[plugin_name].manifest["type"] in ["target", "web"]:
-                method = self.ascanner.plugins.plugins[plugin_name].name.lower()
                 plugin_utils = self.ascanner.plugins.plugins[plugin_name].plugin_utils
+
+            if self.ascanner.plugins.plugins[plugin_name].manifest["type"] in ["target"]:
                 self.targets[method] = self.ascanner.plugins.plugins[plugin_name].Plugin_OBJ(self.ascanner, plugin_utils)
 
         self.watchdog = ASWatchdog(self.ascanner)
