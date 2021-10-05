@@ -32,8 +32,8 @@ class ASWatchdog():
                     if dir_setting in list(self.ascanner.config.dict[directory.lower()].keys()):
                         curr_dict[dir_setting] = self.ascanner.config.dict[directory.lower()][dir_setting]
 
-            if curr_dict["patterns"] == "media":
-                curr_dict["patterns"] = self.media_patterns
+            # if curr_dict["patterns"] == "media":
+            #    curr_dict["patterns"] = self.media_patterns
 
             curr_dict["handler"] = WHandler(patterns=curr_dict["patterns"])
             curr_dict["handler"].ascanner = self.ascanner
@@ -83,7 +83,8 @@ class ASWatchdog():
 
     @property
     def media_patterns(self):
-        return ["*.webm",
+        return [
+                "*.webm",
                 "*.mkv",
                 "*.flv",
                 "*.vob",
