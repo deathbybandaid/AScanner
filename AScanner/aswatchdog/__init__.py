@@ -2,7 +2,9 @@ import time
 
 from watchdog.observers import polling
 
-from .whandler import WHandler
+from .allhandler import AllHandler
+from .mediahandler import MediaHandler
+from .subtitlehandler import SubtitleHandler
 
 
 class ASWatchdog():
@@ -32,10 +34,13 @@ class ASWatchdog():
                     if dir_setting in list(self.ascanner.config.dict[directory.lower()].keys()):
                         curr_dict[dir_setting] = self.ascanner.config.dict[directory.lower()][dir_setting]
 
-            # if curr_dict["patterns"] == "media":
-            #    curr_dict["patterns"] = self.media_patterns
+            if curr_dict["patterns"] == "media":
+                curr_dict["handler"] = MediaHandler()
+            elif curr_dict["patterns"] == "subtitle":
+                curr_dict["handler"] = SubtitleHandler()
+            else:
+                curr_dict["handler"] = AllHandler()
 
-            curr_dict["handler"] = WHandler(patterns=curr_dict["patterns"])
             curr_dict["handler"].ascanner = self.ascanner
 
             self.directories[directory] = curr_dict
@@ -80,50 +85,3 @@ class ASWatchdog():
                 "recursive": False,
                 "patterns": None
                 }
-
-    @property
-    def media_patterns(self):
-        return [
-                "*.webm",
-                "*.mkv",
-                "*.flv",
-                "*.vob",
-                "*.ogv",
-                "*.ogg",
-                "*.drc",
-                "*.gif",
-                "*.gifv",
-                "*.mng",
-                "*.avi",
-                "*.mov",
-                "*.qt",
-                "*.wmv",
-                "*.yuv",
-                "*.rm",
-                "*.rmvb",
-                "*.asf",
-                "*.amv",
-                "*.mp4",
-                "*.m4p",
-                "*.m4v",
-                "*.mpg",
-                "*.mp2",
-                "*.mpeg",
-                "*.mpe",
-                "*.mpv",
-                "*.m2v",
-                "*.m4v",
-                "*.svi",
-                "*.3gp",
-                "*.3g2",
-                "*.mxf",
-                "*.roq",
-                "*.nsv",
-                "*.f4v",
-                "*.f4p",
-                "*.f4a",
-                "*.f4b",
-                "*.mp3",
-                "*.flac",
-                "*.ts"
-                ]

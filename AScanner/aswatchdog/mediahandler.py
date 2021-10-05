@@ -1,8 +1,7 @@
 from watchdog.events import PatternMatchingEventHandler
 
 
-class WHandler(PatternMatchingEventHandler):
-    # patterns = []
+class MediaHandler(PatternMatchingEventHandler):
     patterns = [
                 "*.webm",
                 "*.mkv",
