@@ -18,7 +18,7 @@ class Startup_Tasks():
         self.ascanner.logger.info("Running Startup Tasks.")
 
         # Start watchdog thread
-        self.ascanner.api.no_response_get(self.watchdog_start_url)
+        self.ascanner.api.threadget(self.watchdog_start_url)
 
         self.ascanner.logger.info("Startup Tasks Complete.")
 
