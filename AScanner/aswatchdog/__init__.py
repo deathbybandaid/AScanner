@@ -19,7 +19,7 @@ class ASWatchdog():
     def __init__(self, ascanner):
         self.ascanner = ascanner
 
-        self.observer = polling.PollingObserver(timeout=180)
+        self.observer = polling.PollingObserver()
 
         self.directories = {}
 
@@ -61,7 +61,8 @@ class ASWatchdog():
 
         # monitor
         try:
-            while True:
+            while self.observer.is_alive():
+                self.ascanner.logger.info("Continuing to observing %s directories" % len(list(self.directories.keys())))
                 time.sleep(1)
         except KeyboardInterrupt:
             self.observer.unschedule_all()
