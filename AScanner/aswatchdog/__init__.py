@@ -1,7 +1,5 @@
 import time
 
-from AScanner.tools import humanized_time
-
 from watchdog.observers import polling
 
 from .whandler import WHandler
