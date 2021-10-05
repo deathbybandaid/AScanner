@@ -1,0 +1,9 @@
+{
+  "main":{
+          "scan_dirs":{
+                          "value": "none",
+                          "config_file": true,
+                          "config_web": true
+                        }
+  }
+}

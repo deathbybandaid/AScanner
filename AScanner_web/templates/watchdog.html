@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h4 style="text-align: center;">AScanner Watchdog Directories</h4>
+
+  <div class="container">
+    <table class="table-medium center action-col">
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <th>Recursive</th>
+        </tr>
+
+        {% for key in list(watchdog_dict.keys()) %}
+          <tr>
+            <td>{{ key }}</td>
+            <td>{{ watchdog_dict[key]["recursive"] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

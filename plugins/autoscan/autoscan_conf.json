@@ -1,0 +1,39 @@
+{
+  "autoscan": {
+        "address":{
+                    "value": "127.0.0.1",
+                    "config_file": true,
+                    "config_web": true
+                      },
+        "port":{
+                  "value": 3030,
+                  "config_file": true,
+                  "config_web": true
+              },
+        "ssl":{
+                  "value": false,
+                  "config_file": true,
+                  "config_web": true
+              },
+        "username":{
+                  "value": "none",
+                  "config_file": true,
+                  "config_web": true,
+                  "required": true
+              },
+        "password":{
+                  "value": "none",
+                  "config_file": true,
+                  "config_web": true,
+                  "config_web_hidden": true,
+                  "required": true
+              },
+        "enabled":{
+                  "value": false,
+                  "config_file": true,
+                  "config_web": true,
+                  "config_web_hidden": true,
+                  "required": true
+              }
+  }
+}

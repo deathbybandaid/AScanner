@@ -1,0 +1,38 @@
+{
+  "plex_autoscan": {
+        "address":{
+                    "value": "127.0.0.1",
+                    "config_file": true,
+                    "config_web": true
+                      },
+        "port":{
+                  "value": 3467,
+                  "config_file": true,
+                  "config_web": true
+              },
+        "ssl":{
+                  "value": false,
+                  "config_file": true,
+                  "config_web": true
+              },
+        "password":{
+                  "value": "none",
+                  "config_file": true,
+                  "config_web": true,
+                  "config_web_hidden": true,
+                  "required": true
+              },
+        "enabled":{
+                  "value": false,
+                  "config_file": true,
+                  "config_web": true,
+                  "config_web_hidden": true,
+                  "required": true
+              },
+        "apikey":{
+                  "value": "plex_autoscan",
+                  "config_file": true,
+                  "config_web": true
+              }
+  }
+}
