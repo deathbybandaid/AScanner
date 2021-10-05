@@ -60,7 +60,8 @@ class WHandler(PatternMatchingEventHandler):
 
         self.ascanner.logger.info("Detected a %s change to %s" % (event.event_type, event.src_path))
         for plugin_name in list(self.ascanner.targets.keys()):
-            self.ascanner.targets[plugin_name].dispatch(event)
+            if self.ascanner.plugins.plugins[plugin_name].manifest["type"] in ["target"]:
+                self.ascanner.targets[plugin_name].dispatch(event)
 
     def on_modified(self, event):
         self.process(event)
