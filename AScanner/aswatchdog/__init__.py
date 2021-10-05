@@ -1,5 +1,7 @@
 import time
 
+from AScanner.tools import humanized_time
+
 from watchdog.observers import polling
 
 from .whandler import WHandler
@@ -47,7 +49,8 @@ class ASWatchdog():
                 path=directory,
                 recursive=self.directories[directory]["recursive"])
 
-        self.observer.daemon = True
+    def scan_interval(self):
+        return self.ascanner.config.dict["watchdog"]["polling_interval"]
 
     def start(self):
 
@@ -55,15 +58,21 @@ class ASWatchdog():
         for directory in list(self.directories.keys()):
             self.ascanner.logger.info("* %s, recursive=%s" % (directory, self.directories[directory]["recursive"]))
 
+        scan_start_time = time.time()
+
         self.observer.start()
 
         self.ascanner.logger.info("Observing %s directories" % len(list(self.directories.keys())))
 
         # monitor
         try:
-            while self.observer.is_alive():
-                self.ascanner.logger.info("Continuing to observing %s directories" % len(list(self.directories.keys())))
-                time.sleep(1)
+            while True:
+                scan_end_time = time.time()
+                sleeptime = self.scan_interval
+                self.ascanner.logger.info("Performed a scan of %s directories. Process took %s. Sleeping for %s" % (
+                    len(list(self.directories.keys())), humanized_time(scan_end_time - scan_start_time), humanized_time(sleeptime)))
+                time.sleep(sleeptime)
+                scan_start_time = time.time()
         except KeyboardInterrupt:
             self.observer.unschedule_all()
             self.observer.stop()

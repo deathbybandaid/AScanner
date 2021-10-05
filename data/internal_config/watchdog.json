@@ -4,6 +4,11 @@
                           "value": "none",
                           "config_file": true,
                           "config_web": true
+                        },
+          "polling_interval":{
+                          "value": 180,
+                          "config_file": true,
+                          "config_web": true
                         }
   }
 }
