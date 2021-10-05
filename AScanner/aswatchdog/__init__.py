@@ -19,7 +19,7 @@ class ASWatchdog():
     def __init__(self, ascanner):
         self.ascanner = ascanner
 
-        self.observer = polling.PollingObserver()
+        self.observer = polling.PollingObserver(timeout=180)
 
         self.directories = {}
 
